@@ -71,9 +71,18 @@ const loginUser = async (req, res) => {
     }
     const private_key = process.env.PRIVATE_KEY;
     console.log(private_key);
-    let token = await jwt.sign({ id: foundUser._id }, private_key, {
-      algorithm: "HS256",
-    });
+    let token = await jwt.sign(
+      {
+        id: foundUser._id,
+        email: foundUser.email,
+        role: foundUser.role,
+        username: foundUser.username,
+      },
+      private_key,
+      {
+        algorithm: "HS256",
+      },
+    );
 
     console.log(token, "toekmkn");
 
