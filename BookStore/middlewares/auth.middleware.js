@@ -8,7 +8,11 @@ const authMiddleware = async (req, res, next) => {
       message: "invalid token",
     });
   } else {
-    var decoded = await jwt.verify(token, process.env.PRIVATE_KEY);
+    try {
+      var decoded = await jwt.verify(token, process.env.PRIVATE_KEY);
+    } catch (error) {
+      console.log(error);
+    }
     console.log(decoded, "decoded");
     req.user = decoded;
     next();

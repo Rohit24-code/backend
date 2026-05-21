@@ -1,13 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config();
 const morgan = require("morgan");
 const bookRouter = require("./routes/book.router");
 const cors = require("cors");
 const { default: mongoose, connect } = require("mongoose");
 const connectDb = require("./db");
 const authRouter = require("./routes/user.router");
+const imageRouter = require("./routes/file.router");
 
-dotenv.config();
 const PORT = 6000;
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(morgan());
 
 app.use("/api/book", bookRouter);
 app.use("/api/user", authRouter);
+app.use("/api/image", imageRouter);
 
 app.listen(PORT, async () => {
   await connectDb();

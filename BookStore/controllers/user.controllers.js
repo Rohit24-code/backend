@@ -84,8 +84,6 @@ const loginUser = async (req, res) => {
       },
     );
 
-    console.log(token, "toekmkn");
-
     return res.status(200).json({
       status: 1,
       message: "user logged in  successfully",
